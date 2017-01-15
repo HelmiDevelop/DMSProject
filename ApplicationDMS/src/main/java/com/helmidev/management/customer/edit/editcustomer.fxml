@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<AnchorPane id="AnchorPane" prefHeight="631.0" prefWidth="972.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.helmidev.management.customer.edit.EditcustomerPresenter">
+    <children>
+      <GridPane hgap="3.0" maxHeight="185.0" maxWidth="970.0" minHeight="185.0" minWidth="626.0" prefHeight="185.0" prefWidth="626.0" scaleShape="false" vgap="3.0">
+         <columnConstraints>
+            <ColumnConstraints fillWidth="false" halignment="LEFT" hgrow="NEVER" maxWidth="480.0" minWidth="112.0" prefWidth="134.0" />
+            <ColumnConstraints fillWidth="false" halignment="LEFT" hgrow="NEVER" maxWidth="839.0" minWidth="10.0" prefWidth="817.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints fillHeight="false" maxHeight="20.0" minHeight="20.0" percentHeight="20.0" prefHeight="20.0" valignment="CENTER" vgrow="NEVER" />
+            <RowConstraints fillHeight="false" maxHeight="20.0" minHeight="20.0" percentHeight="20.0" prefHeight="20.0" valignment="CENTER" vgrow="NEVER" />
+            <RowConstraints fillHeight="false" maxHeight="20.0" minHeight="20.0" percentHeight="20.0" prefHeight="20.0" valignment="CENTER" vgrow="NEVER" />
+            <RowConstraints fillHeight="false" maxHeight="20.0" minHeight="20.0" percentHeight="20.0" prefHeight="20.0" valignment="CENTER" vgrow="NEVER" />
+            <RowConstraints fillHeight="false" maxHeight="20.0" minHeight="20.0" percentHeight="20.0" prefHeight="20.0" valignment="CENTER" vgrow="NEVER" />
+         </rowConstraints>
+         <children>
+            <Label text="%lbl_customerFirstName">
+               <GridPane.margin>
+                  <Insets left="5.0" right="5.0" />
+               </GridPane.margin>
+            </Label>
+            <Label text="%lbl_customerLastName" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets left="5.0" right="5.0" />
+               </GridPane.margin>
+            </Label>
+            <Label text="%lbl_customerEmailAdress" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets left="5.0" right="5.0" />
+               </GridPane.margin>
+            </Label>
+            <Label text="%lbl_customerAmount" GridPane.rowIndex="3">
+               <GridPane.margin>
+                  <Insets left="5.0" right="5.0" />
+               </GridPane.margin>
+            </Label>
+            <TextField fx:id="customerFirstName" prefHeight="31.0" prefWidth="420.0" GridPane.columnIndex="1" />
+            <TextField fx:id="customerLastName" prefHeight="31.0" prefWidth="420.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="customerEmailAdress" prefHeight="31.0" prefWidth="420.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="customerAmount" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Button fx:id="saveCustomerButton" mnemonicParsing="false" text="%lbl_save" GridPane.columnIndex="1" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets left="322.0" />
+               </GridPane.margin>
+            </Button>
+            <Button fx:id="cancelEditCustomer" cancelButton="true" mnemonicParsing="false" text="%lbl_cancel" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets right="30.0" />
+               </GridPane.margin>
+            </Button>
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>
+
