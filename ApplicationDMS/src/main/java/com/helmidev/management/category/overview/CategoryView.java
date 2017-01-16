@@ -5,10 +5,12 @@
  */
 package com.helmidev.management.category.overview;
 
+import com.airhacks.afterburner.views.FXMLView;
+
 /**
  *
  * @author hoben
  */
-public class CategoryView {
+public class CategoryView extends FXMLView {
     
 }

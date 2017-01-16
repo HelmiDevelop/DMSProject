@@ -25,7 +25,7 @@ import javax.inject.Inject;
  *
  * @author hoben
  */
-public class EditcustomerPresenter implements Initializable {
+public class EditCustomerPresenter implements Initializable {
 
     @FXML
     private TextField customerFirstName;
@@ -88,9 +88,9 @@ public class EditcustomerPresenter implements Initializable {
             this.customerService.updateCustomer(customerToedit);
 
             Alert info = new Alert(Alert.AlertType.INFORMATION);
-            info.setTitle("Confirmation");
-            info.setHeaderText("Speichern erfolgreich");
-            String msg = String.format("Kunde %1s wurde erfolgreich hinzugefügt", customerFirstName.getText() + " " + customerLastName.getText());
+            info.setTitle("Bestätigung");
+            info.setHeaderText("Änderungen erfolgreich gespeichert");
+            String msg = String.format("Kunde %1s wurde erfolgreich aktualisiert", customerFirstName.getText() + " " + customerLastName.getText());
             info.setContentText(msg);
             info.showAndWait().ifPresent(rs -> {
                 if (rs == ButtonType.OK) {
@@ -113,7 +113,7 @@ public class EditcustomerPresenter implements Initializable {
     }
 
     private void onCancelClick(ActionEvent event) {
-
+        ((Node)event.getSource()).getScene().getWindow().hide();
         System.out.println(event.getSource().toString());
     }
 

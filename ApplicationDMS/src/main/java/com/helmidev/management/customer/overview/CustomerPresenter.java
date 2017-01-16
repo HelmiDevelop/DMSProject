@@ -8,7 +8,7 @@ package com.helmidev.management.customer.overview;
 import com.helmidev.entities.Customer;
 import com.helmidev.jpacontrollers.exceptions.IllegalOrphanException;
 import com.helmidev.jpacontrollers.exceptions.NonexistentEntityException;
-import com.helmidev.management.customer.edit.EditcustomerPresenter;
+import com.helmidev.management.customer.edit.EditCustomerPresenter;
 import com.helmidev.management.customer.edit.EditCustomerView;
 import com.helmidev.services.CustomerService;
 import com.main.commons.ModalDialog;
@@ -94,7 +94,7 @@ public class CustomerPresenter implements Initializable {
     @Inject
     CustomerService customerService;
 
-    EditcustomerPresenter editPresenter;
+    EditCustomerPresenter editPresenter;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -209,7 +209,7 @@ public class CustomerPresenter implements Initializable {
         Customer customer = (Customer) customersTable.getSelectionModel().getSelectedItem();
         if (customer != null) {
             EditCustomerView editView = new EditCustomerView();
-            this.editPresenter = (EditcustomerPresenter) editView.getPresenter();
+            this.editPresenter = (EditCustomerPresenter) editView.getPresenter();
             editPresenter.setCustomer(customer);
             ModalDialog dialogimpl = new ModalDialog();
             Stage dialog = dialogimpl.createModal(editView.getView(), (Node)event.getSource());

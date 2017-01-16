@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
-<AnchorPane id="AnchorPane" prefHeight="631.0" prefWidth="972.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.helmidev.management.customer.edit.EditcustomerPresenter">
+<AnchorPane id="AnchorPane" prefHeight="631.0" prefWidth="972.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.helmidev.management.customer.edit.EditCustomerPresenter">
     <children>
       <GridPane hgap="3.0" maxHeight="185.0" maxWidth="970.0" minHeight="185.0" minWidth="626.0" prefHeight="185.0" prefWidth="626.0" scaleShape="false" vgap="3.0">
          <columnConstraints>

@@ -6,7 +6,6 @@
 package com.helmidev.management.product;
 
 import com.helmidev.management.category.add.AddCategoryView;
-import com.helmidev.management.category.overview.CategoryView;
 import com.main.commons.ModalDialog;
 import java.net.URL;
 import java.util.ResourceBundle;
