@@ -5,9 +5,17 @@
  */
 package com.helmidev.management.product;
 
+import com.helmidev.management.category.add.AddCategoryView;
+import com.helmidev.management.category.overview.CategoryView;
+import com.main.commons.ModalDialog;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
 /**
  *
@@ -15,9 +23,29 @@ import javafx.fxml.Initializable;
  */
 public class ProductPresenter implements Initializable{
 
+    
+    @FXML Button addCategory;
+    @FXML Button addPack;
+    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // init view events, ...
+       addCategory.setOnAction((event) -> {
+           onaddCategoryClick(event);
+       });
+       addPack.setOnAction((event) -> {
+           onaddPackClick(event);
+       });
+    }
+
+    private void onaddCategoryClick(ActionEvent event) {
+        ModalDialog dialogImpl = new ModalDialog();
+        AddCategoryView catView = new AddCategoryView();
+        Stage dialog = dialogImpl.createModal(catView.getView(),(Node) event.getSource());
+        dialog.showAndWait();
+    }
+
+    private void onaddPackClick(ActionEvent event) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

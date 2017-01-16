@@ -58,7 +58,7 @@
                         <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
                            <children>
                               <ChoiceBox prefHeight="31.0" prefWidth="312.0" />
-                              <Button mnemonicParsing="false" text="+">
+                              <Button fx:id="addPack" mnemonicParsing="false" text="+">
                                  <HBox.margin>
                                     <Insets left="10.0" />
                                  </HBox.margin>
@@ -68,7 +68,7 @@
                         <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
                            <children>
                               <ChoiceBox prefHeight="31.0" prefWidth="312.0" />
-                              <Button mnemonicParsing="false" text="+">
+                              <Button fx:id="addCategory" mnemonicParsing="false" text="+">
                                  <HBox.margin>
                                     <Insets left="10.0" />
                                  </HBox.margin>
