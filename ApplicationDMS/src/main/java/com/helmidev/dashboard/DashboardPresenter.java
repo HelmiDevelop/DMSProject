@@ -154,14 +154,15 @@ public class DashboardPresenter implements Initializable{
         System.out.println(event.getSource().toString());
     }
 
-    private void onViewAllCustomers(ActionEvent event) {        
+    private void onViewAllCustomers(ActionEvent event) {      
+        GuiUtils.handleLoading(loadingController, true);
         CustomerView customerView = new CustomerView();
         Consumer<Object> customerConsumer = this::consume;
         customerView.getPresenter(customerConsumer);
         Parent view = customerView.getView();
         this.mainPanelAnchorPane.getChildren().clear();
         this.mainPanelAnchorPane.getChildren().add(view);
-        
+        GuiUtils.handleLoading(loadingController, false);
         System.out.println(event.getSource().toString());
     }
 

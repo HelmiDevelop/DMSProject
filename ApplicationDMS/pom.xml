@@ -55,10 +55,15 @@
             <type>jar</type>
         </dependency>
         <dependency>
-            <groupId>com.HelmiDev</groupId>
-            <artifactId>ApplicationDMS</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <type>jar</type>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>eclipselink</artifactId>
+            <version>2.5.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>org.eclipse.persistence.jpa.modelgen.processor</artifactId>
+            <version>2.5.2</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
     <build>
@@ -78,6 +83,7 @@
                             <excludeScope>system</excludeScope>
                             <excludeGroupIds>junit,org.mockito,org.hamcrest</excludeGroupIds>
                             <outputDirectory>${project.build.directory}/classes</outputDirectory>
+                            <excludes>META-INF/*.SF,META-INF/*.DSA,META-INF/*.RSA</excludes>                            
                         </configuration>
                     </execution>
                 </executions>
@@ -99,7 +105,7 @@
                                 <argument>-createjar</argument>
                                 <argument>-nocss2bin</argument>
                                 <argument>-appclass</argument>
-                                <argument>com.airhacks.followme.App</argument>
+                                <argument>com.helmidev.appstart.App</argument>
                                 <argument>-srcdir</argument>
                                 <argument>${project.build.directory}/classes</argument>
                                 <argument>-outdir</argument>

@@ -24,10 +24,10 @@
           <AnchorPane maxHeight="327.0" minHeight="327.0" minWidth="0.0" prefHeight="327.0" prefWidth="160.0">
                <children>
                   <Group layoutX="46.0" layoutY="41.0" />
-                  <GridPane layoutX="20.0" layoutY="40.0" prefHeight="300.0" prefWidth="971.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <GridPane layoutX="20.0" layoutY="40.0" prefHeight="320.0" prefWidth="971.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columnConstraints>
                       <ColumnConstraints fillWidth="false" hgrow="NEVER" maxWidth="184.0" minWidth="184.0" prefWidth="184.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="787.0" minWidth="10.0" prefWidth="787.0" />
+                      <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="787.0" minWidth="10.0" prefWidth="787.0" />
                     </columnConstraints>
                     <rowConstraints>
                       <RowConstraints fillHeight="false" maxHeight="37.0" minHeight="20.0" prefHeight="37.0" valignment="CENTER" vgrow="ALWAYS" />
@@ -49,13 +49,13 @@
                         <Label text="%lbl_product_IsPledge" GridPane.rowIndex="5" />
                         <Label text="%lbl_packaging_Name" GridPane.rowIndex="6" />
                         <Label text="%lbl_category_Name" GridPane.rowIndex="7" />
-                        <TextField GridPane.columnIndex="1" />
-                        <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField prefHeight="31.0" prefWidth="300.0" GridPane.columnIndex="1" />
+                        <TextField prefHeight="31.0" prefWidth="662.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
                         <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                        <CheckBox mnemonicParsing="false" text="CheckBox" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                        <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                        <CheckBox mnemonicParsing="false" text="Pfand?" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <HBox prefHeight="37.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
                            <children>
                               <ChoiceBox prefHeight="31.0" prefWidth="312.0" />
                               <Button fx:id="addPack" mnemonicParsing="false" text="+">
@@ -65,7 +65,7 @@
                               </Button>
                            </children>
                         </HBox>
-                        <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                        <HBox prefHeight="37.0" prefWidth="301.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
                            <children>
                               <ChoiceBox prefHeight="31.0" prefWidth="312.0" />
                               <Button fx:id="addCategory" mnemonicParsing="false" text="+">
@@ -79,8 +79,14 @@
                            <children>
                               <Button mnemonicParsing="false" text="%lbl_save_product" />
                            </children>
+                           <GridPane.margin>
+                              <Insets left="521.0" />
+                           </GridPane.margin>
                         </HBox>
                      </children>
+                     <opaqueInsets>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </opaqueInsets>
                   </GridPane>
                </children>
             </AnchorPane>

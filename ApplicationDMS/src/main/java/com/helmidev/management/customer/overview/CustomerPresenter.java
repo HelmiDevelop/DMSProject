@@ -17,6 +17,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -98,7 +99,7 @@ public class CustomerPresenter implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        initializeCustomerTableView();
+
         saveCustomerButton.setOnAction((ActionEvent event) -> {
             onCustomerSaveClick(event);
         });
@@ -132,7 +133,7 @@ public class CustomerPresenter implements Initializable {
 
     }
 
-    private void onCustomerSaveClick(ActionEvent event) {
+    private void onCustomerSaveClick(ActionEvent event) {        
         Customer customer = new Customer();
         customer.setFirstname(this.customerFirstName.getText());
         customer.setLastname(this.customerLastName.getText());
@@ -212,12 +213,10 @@ public class CustomerPresenter implements Initializable {
             this.editPresenter = (EditCustomerPresenter) editView.getPresenter();
             editPresenter.setCustomer(customer);
             ModalDialog dialogimpl = new ModalDialog();
-            Stage dialog = dialogimpl.createModal(editView.getView(), (Node)event.getSource());
+            Stage dialog = dialogimpl.createModal(editView.getView(), (Node) event.getSource());
             dialog.setMaxWidth(700);
             dialog.setMaxHeight(250);
             dialog.showAndWait();
-            
-           
 
         }
     }

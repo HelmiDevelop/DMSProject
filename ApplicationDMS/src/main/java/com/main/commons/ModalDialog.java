@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  *
@@ -27,9 +28,12 @@ public class ModalDialog {
         container.getChildren().add(view);
         
         Stage dialog = new Stage();
+        dialog.initModality(Modality.APPLICATION_MODAL);
+        dialog.initStyle(StageStyle.UTILITY);
+        dialog.setMaximized(false);
         dialog.setScene(new Scene(container));        
         dialog.initOwner(source.getScene().getWindow());
-        dialog.initModality(Modality.APPLICATION_MODAL);
+        
         return dialog;
         
     }
