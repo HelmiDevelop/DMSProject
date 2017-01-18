@@ -7,7 +7,16 @@ package com.main.utils;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,97 +40,45 @@ public class JaxbConverter<T> {
     private Unmarshaller unmarshaller = null;
     private Marshaller marshaller = null;
 
-    public JaxbConverter( Class clazz) {
-        try {
-            context = JAXBContext.newInstance(clazz);
-        } catch (JAXBException e) {
-            Logger.getLogger(JaxbConverter.class.getName()).log(Level.SEVERE, null, e);
-        }
+    T object ;
+    public JaxbConverter() {
+        
     }
 
-    /**
-     * marshall
-     * @param data : array of bytes
-     * @return 
-     * @throws javax.xml.stream.XMLStreamException
-     * @throws javax.xml.bind.JAXBException
-     * */
-    public T marshal(byte[] data) throws XMLStreamException, JAXBException {
-
-        XMLInputFactory fac = XMLInputFactory.newInstance();
-        XMLStreamReader reader = null;
-
-        if (unmarshaller == null) {
-            unmarshaller = context.createUnmarshaller();
-        }
-        try {
-            reader = fac.createXMLStreamReader(new ByteArrayInputStream(data), CHARSET);
-            Object obj = unmarshaller.unmarshal(reader);
-            if (obj != null ) {
-                T t = (T) obj;
-                return t;
-            }
-        } finally {
-            if (reader != null) {
-                reader.close();
+    public T readXML(Class clazz, String output) throws JAXBException{
+        T resultObj = null ;
+        JAXBContext jAXBContext = JAXBContext.newInstance(clazz.getPackage().getName());
+        this.unmarshaller = jAXBContext.createUnmarshaller();
+        File out = new File(output);
+        if(out.exists()){
+            try(InputStream stream = new FileInputStream(output)) {
+                
+                resultObj = (T)unmarshaller.unmarshal(stream);
+                return resultObj;
+            } catch (Exception e) {
+                //TODO catch exception
             }
         }
-        return null;
+        return resultObj;
     }
-
-    /**
-     * marshall an input stream
-     * @param data : an Input stream
-     * @return T
-     * @throws javax.xml.stream.XMLStreamException
-     * @throws javax.xml.bind.JAXBException
-     * @throws java.sql.SQLException
-     * */
-    public T marshal(InputStream data) throws XMLStreamException, JAXBException, SQLException {
-
-        XMLInputFactory fac = XMLInputFactory.newInstance();
-        XMLStreamReader reader = null;
-
-        if (unmarshaller == null) {
-            unmarshaller = context.createUnmarshaller();
+    
+    public boolean writeToFile(T jaxbElement, String output) throws JAXBException, FileNotFoundException, IOException{
+        boolean result;
+        JAXBContext jAXBContext = JAXBContext.newInstance(jaxbElement.getClass().getPackage().getName());
+        this.marshaller = jAXBContext.createMarshaller();
+        marshaller.setProperty(javax.xml.bind.Marshaller.JAXB_ENCODING, "UTF-8"); //NOI18N
+        marshaller.setProperty(javax.xml.bind.Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+        File out = new File(output);
+        if(!out.exists()){
+            Path path = Paths.get(output);
+            Files.createDirectories(path.getParent());
+            Files.createFile(path);
         }
-        try {
-            reader = fac.createXMLStreamReader(data, CHARSET);
-            Object obj = unmarshaller.unmarshal(reader);
-            if (obj != null) {
-                T t = (T) obj;
-                return t;
-            }
-        } finally {
-            if (reader != null) {
-                reader.close();
-            }
+        try (OutputStream os = new FileOutputStream( output )) {
+            marshaller.marshal(jaxbElement, os);
+            result = true;
         }
-        return null;
-    }
-
-    /**
-     * unmarshal an object and return a byte array
-     *
-     * @param obj
-     * @return 
-     * @throws javax.xml.stream.XMLStreamException
-     * @throws javax.xml.bind.JAXBException */
-    public byte[] unmarshal(T obj) throws XMLStreamException, JAXBException {
-
-        if(context == null){
-            context = JAXBContext.newInstance(obj.getClass());
-        }
-        if (marshaller == null) {
-            marshaller = context.createMarshaller();
-            marshaller.setProperty(Marshaller.JAXB_ENCODING, CHARSET);
-            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, false);
-            marshaller.setProperty(Marshaller.JAXB_FRAGMENT, true);
-        }
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        marshaller.marshal(obj, baos);
-
-        return baos.toByteArray();
+        return result;
     }
     
 }

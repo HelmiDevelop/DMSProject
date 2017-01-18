@@ -57,19 +57,19 @@ public class CategoryPresenter implements Initializable {
         this.addcategoryPane.getChildren().clear();
         this.addcategoryPane.getChildren().add(view);
         editCategory.setOnAction((ActionEvent event)  -> {
-            onEditClick();
+            onEditClick(event);
         });
         deleteCategory.setOnAction ((ActionEvent event)-> {
-            onDeleteClick(); 
+            onDeleteClick(event); 
         });
     }
     
     
-    private void onEditClick() {
+    private void onEditClick(ActionEvent event) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    private void onDeleteClick() {
+    private void onDeleteClick(ActionEvent event) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

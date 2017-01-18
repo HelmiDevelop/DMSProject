@@ -3,6 +3,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element type="xs:string" name="URL"/>
+        <xs:element type="xs:string" name="DBNAME"/>
         <xs:element type="xs:string" name="USERNANE"/>
         <xs:element type="xs:string" name="PASSWORD"/>
         <xs:element type="xs:string" name="JDBCDRIVER"/>

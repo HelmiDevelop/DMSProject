@@ -5,6 +5,7 @@
  */
 package com.helmidev.jpacontrollers;
 
+import com.helmidev.utils.PersistenceMap;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -20,7 +21,7 @@ public abstract class AbstractController<T> {
     protected EntityManagerFactory emf;
 
     public AbstractController() {
-        emf = Persistence.createEntityManagerFactory("DMSPU");
+        emf = Persistence.createEntityManagerFactory("DMSPU", PersistenceMap.PersistenceProperties);
     }
 
     protected EntityManager getEntityManager() {

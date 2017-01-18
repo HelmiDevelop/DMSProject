@@ -67,15 +67,13 @@ public class DashboardPresenter implements Initializable{
 
     private ResourceBundle bundle;
     private String imageResourceUrl;
-    ProgressBar progressBar;
-
+    
     @Override
     public void initialize(URL location, ResourceBundle resources) { 
         bundle = resources;
         imageResourceUrl = getClass().getResource("/images").toExternalForm();
         handleMainToolbar();
-        loadWelcomeView();
-        alignTooltipBarItems();
+        loadWelcomeView();       
         // set programmatically
         //btn_toolbar_createNewCustomer.setText(bundle.getString("lbl_btn_toolbar_createNewCustomer"));
 
@@ -109,12 +107,7 @@ public class DashboardPresenter implements Initializable{
         Image billingImage = new Image(imageResourceUrl+"/ic_content_paste_black_24dp.png");
         addBillingBtn.setGraphic(new ImageView(billingImage));
         topToolbar.getItems().add(addBillingBtn);
-    }
-    private void alignTooltipBarItems(){
-        progressBar = new ProgressBar();
-        progressBar.setProgress(0);
-        bottomToolbar.getItems().add(progressBar);
-    }
+    }    
     private void loadWelcomeView(){
         WelcomeView welcomeView = new WelcomeView();
         Parent view = welcomeView.getView();
@@ -177,7 +170,7 @@ public class DashboardPresenter implements Initializable{
         Parent view = categoryView.getView();
         this.mainPanelAnchorPane.getChildren().clear();
         this.mainPanelAnchorPane.getChildren().add(view);
-        GuiUtils.handleLoading(progressBar, false);
+        GuiUtils.handleLoading(loadingController, false);
         System.out.println(event.getSource().toString());
     }
 

@@ -24,23 +24,20 @@ import com.airhacks.afterburner.injection.Injector;
 import com.helmidev.dashboard.DashboardView;
 import com.helmidev.database.config.DatabaseConfigPresenter;
 import com.helmidev.database.config.DatabaseConfigView;
+import com.helmidev.database.config.PersitenceUnit;
 import com.main.commons.ModalDialog;
 import com.main.utils.DmsConfig;
+import com.main.utils.JaxbConverter;
+import com.helmidev.utils.PersistenceMap;
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.attribute.FileAttribute;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javafx.application.Application;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javax.xml.bind.JAXBException;
 
 /**
  *
@@ -62,8 +59,6 @@ public class App extends Application {
     public void start(Stage stage) throws Exception {
 
         try {
-            BorderPane root = new BorderPane(new Label("Loading complete!"));
-
             /* check DB config. check if file <USER>/DMS/DB/dmsDB.sqlite exists.
                 if not load db config db view to create one 
              */
@@ -81,6 +76,19 @@ public class App extends Application {
                     ModalDialog modalDialog = new ModalDialog();
                     Stage configStage = modalDialog.createModal(configView.getView(), ((Stage)event.getSource()).getScene().getRoot());
                     configStage.showAndWait();
+                }else{
+                    JaxbConverter<PersitenceUnit> jaxbConverter = new JaxbConverter<>();
+                    try {
+                        PersitenceUnit persitenceUnit = jaxbConverter.readXML(PersitenceUnit.class, DmsConfig.DMS_DB_CONFIG_PATH);
+                        PersistenceMap.CreatePersistencePropertyMap(
+                                persitenceUnit.getURL(), 
+                                persitenceUnit.getDBNAME(), 
+                                persitenceUnit.getUSERNANE(), 
+                                persitenceUnit.getPASSWORD(), 
+                                persitenceUnit.getJDBCDRIVER());
+                    } catch (JAXBException ex) {
+                        Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             });
             stage.show();
