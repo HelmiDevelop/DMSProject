@@ -6,12 +6,18 @@
 package com.helmidev.management.category.overview;
 
 import com.helmidev.entities.Category;
+import com.helmidev.management.category.add.AddCategoryPresenter;
+import com.helmidev.management.category.add.AddCategoryView;
 import java.net.URL;
+import java.util.Observable;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
@@ -30,11 +36,26 @@ public class CategoryPresenter implements Initializable {
     @FXML Button editCategory;
     @FXML Button deleteCategory;
     
-    @FXML AnchorPane addcategory;
-    
+    @FXML AnchorPane addcategoryPane;
+    AddCategoryPresenter addcategorypresenter;
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        AddCategoryView addView = new AddCategoryView();
+        Object presenter = addView.getPresenter();
+        this.addcategorypresenter = (AddCategoryPresenter) presenter;
+        addcategorypresenter.doNotDisplayCancelButton();
+        for (Node node :addView.getView().getChildrenUnmodifiable() ){
+            if (node instanceof Button){
+               if( ((Button) node).isCancelButton()){
+                   ((Button) node).setDisable(true);
+               } 
+            }
+        }
+        Parent view = addView.getView();
+        
+        this.addcategoryPane.getChildren().clear();
+        this.addcategoryPane.getChildren().add(view);
         editCategory.setOnAction((ActionEvent event)  -> {
             onEditClick();
         });

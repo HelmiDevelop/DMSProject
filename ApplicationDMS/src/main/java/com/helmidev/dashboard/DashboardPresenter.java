@@ -5,6 +5,7 @@
  */
 package com.helmidev.dashboard;
 
+import com.helmidev.management.category.overview.CategoryView;
 import com.helmidev.management.customer.overview.CustomerPresenter;
 import com.helmidev.management.customer.overview.CustomerView;
 import com.helmidev.management.product.ProductPresenter;
@@ -42,11 +43,11 @@ public class DashboardPresenter implements Initializable{
     @FXML private Button btnAddNewBilling;
     @FXML private Button btnViewAllBillings;
 
-    @FXML private Button btnAddNewProduct;
+    
     @FXML private Button btnViewAllProducts;
 
-    @FXML private Button btnAddNewPackaging;
-    @FXML private Button btnViewAllPackagings;
+    @FXML private Button btnCategoryOverview;
+    
 
     @FXML private Button btnAddNewCustomer;
     @FXML private Button btnViewAllCustomers;
@@ -87,9 +88,7 @@ public class DashboardPresenter implements Initializable{
         btnViewAllBillings.setOnAction((ActionEvent actionEvent) -> {
             onViewAllBillings(actionEvent);
         });
-        btnAddNewProduct.setOnAction((ActionEvent event) -> {
-            onAddNewProduct(event);
-        });
+        
         btnViewAllProducts.setOnAction((ActionEvent event) -> {
             onViewAllProducts(event);
         });
@@ -99,12 +98,10 @@ public class DashboardPresenter implements Initializable{
         btnViewAllCustomers.setOnAction((ActionEvent event) -> {
             onViewAllCustomers(event);
         });
-        btnAddNewPackaging.setOnAction((ActionEvent event) -> {
-            onAddNewPackaging(event);
+        btnCategoryOverview.setOnAction((ActionEvent event) -> {
+            onCategoryOverview(event);
         });
-        btnViewAllPackagings.setOnAction((ActionEvent event) -> {
-            onViewAllPackagings(event);
-        });
+        
     }
     
     private void handleMainToolbar(){
@@ -136,10 +133,7 @@ public class DashboardPresenter implements Initializable{
         System.out.println(event.getSource().toString());
     }
 
-    private void onAddNewProduct(ActionEvent event) {
-        //TODO laod add new Product Table
-        System.out.println(event.getSource().toString());
-    }
+    
 
     private void onViewAllProducts(ActionEvent event) {
         //TOD load product table.
@@ -174,13 +168,16 @@ public class DashboardPresenter implements Initializable{
 
     }
 
-    private void onAddNewPackaging(ActionEvent event) {
-        //TODO load add new packaging
-        System.out.println(event.getSource().toString());
-    }
+    
 
-    private void onViewAllPackagings(ActionEvent event) {
-        //TODO load packaging table
+    private void onCategoryOverview(ActionEvent event) {
+        GuiUtils.handleLoading(loadingController, true);
+        CategoryView categoryView = new CategoryView();
+        categoryView.getPresenter();
+        Parent view = categoryView.getView();
+        this.mainPanelAnchorPane.getChildren().clear();
+        this.mainPanelAnchorPane.getChildren().add(view);
+        GuiUtils.handleLoading(progressBar, false);
         System.out.println(event.getSource().toString());
     }
 

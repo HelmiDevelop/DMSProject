@@ -76,24 +76,14 @@
                                                   <children>
                                                       <VBox prefHeight="426.0" prefWidth="270.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                           <children>
-                                                              <Button id="btnNewProduct" fx:id="btnAddNewProduct" mnemonicParsing="false" prefHeight="31.0" prefWidth="253.0" text="%lbl_add_new_product">
+                                                              <Button id="btnViewAllProduct" fx:id="btnViewAllProducts" mnemonicParsing="false" prefHeight="31.0" prefWidth="281.0" text="%lbl_productOverview">
                                                                   <VBox.margin>
                                                                       <Insets bottom="3.0" />
                                                                   </VBox.margin>
                                                               </Button>
-                                                              <Button id="btnViewAllProduct" fx:id="btnViewAllProducts" mnemonicParsing="false" prefHeight="31.0" prefWidth="281.0" text="%lbl_show_all_product">
-                                                                  <VBox.margin>
-                                                                      <Insets bottom="3.0" />
-                                                                  </VBox.margin>
-                                                              </Button>
-                                                              <Button fx:id="btnAddNewPackaging" mnemonicParsing="false" prefHeight="31.0" prefWidth="262.0" text="%lbl_add_new_packaging">
+                                                              <Button fx:id="btnCategoryOverview" mnemonicParsing="false" prefHeight="31.0" prefWidth="262.0" text="%lbl_categoryOverview">
                                                                   <VBox.margin>
                                                                       <Insets bottom="3.0" top="10.0" />
-                                                                  </VBox.margin>
-                                                              </Button>
-                                                              <Button fx:id="btnViewAllPackagings" mnemonicParsing="false" prefHeight="31.0" prefWidth="248.0" text="%lbl_view_All_packagings">
-                                                                  <VBox.margin>
-                                                                      <Insets bottom="3.0" />
                                                                   </VBox.margin>
                                                               </Button>
                                                           </children>
