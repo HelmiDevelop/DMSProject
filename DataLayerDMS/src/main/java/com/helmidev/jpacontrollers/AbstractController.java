@@ -21,7 +21,7 @@ public abstract class AbstractController<T> {
     protected EntityManagerFactory emf;
 
     public AbstractController() {
-        emf = Persistence.createEntityManagerFactory("DMSPU", PersistenceMap.PersistenceProperties);
+        emf = Persistence.createEntityManagerFactory("DMSPU");
     }
 
     protected EntityManager getEntityManager() {

@@ -35,6 +35,7 @@ import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javax.xml.bind.JAXBException;
@@ -65,6 +66,8 @@ public class App extends Application {
             DashboardView mainView = new DashboardView();
             Scene scene = new Scene(mainView.getView());
             stage.setTitle("DMS APP");
+            stage.setIconified(true);
+            stage.getIcons().add(new Image(getClass().getResource("/images/ic_launch_3x.png").toExternalForm()));
             final String uri = getClass().getResource("/styles/app.css").toExternalForm();
             scene.getStylesheets().add(uri);
             stage.setScene(scene);
