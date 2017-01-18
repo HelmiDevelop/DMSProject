@@ -36,6 +36,13 @@
             <artifactId>fontawesomefx</artifactId>
             <version>8.3</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.sun.xml.bind/jaxb-impl -->
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
+            <version>2.2.11</version>
+        </dependency>
+
         
         <!--dependency>
             <groupId>org.eclipse.persistence</groupId>
@@ -118,6 +125,33 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.jvnet.jaxb2.maven2</groupId>
+                <artifactId>maven-jaxb2-plugin</artifactId>
+                <version>0.12.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <schemaIncludes>
+                                <include>jaxb/DbConfigModel/*.xsd</include>
+                            </schemaIncludes>
+                            <episodeFile>${project.build.directory}/generated-sources/xjc/META-INF/jaxb-DbConfigModel.episode</episodeFile>
+                            <generatePackage>com.hilmidev.database.config</generatePackage>
+                        </configuration>
+                        <id>jaxb-generate-DbConfigModel</id>
+                    </execution>
+                </executions>
+                <configuration>
+                    <catalog>src/main/resources/jaxb/catalog.xml</catalog>
+                    <catalogResolver>org.jvnet.jaxb2.maven2.resolver.tools.ClasspathCatalogResolver</catalogResolver>
+                    <forceRegenerate>true</forceRegenerate>
+                    <generateDirectory>${project.build.directory}/generated-sources/xjc</generateDirectory>
+                    <verbose>true</verbose>
+                </configuration>
+            </plugin>
         </plugins>
         <resources>
             <resource>
@@ -132,7 +166,7 @@
                 <directory>src/main/resources</directory>
                 <includes>
                     <include>**/*.xml</include>
-		    <include>**/*.png</include>
+                    <include>**/*.png</include>
                     <include>**/*.css</include>
                     <include>**/*.properties</include>
                 </includes>

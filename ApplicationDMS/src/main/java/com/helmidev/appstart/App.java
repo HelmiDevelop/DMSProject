@@ -22,8 +22,21 @@ package com.helmidev.appstart;
 //import com.airhacks.followme.dashboard.DashboardView;
 import com.airhacks.afterburner.injection.Injector;
 import com.helmidev.dashboard.DashboardView;
+import com.helmidev.database.config.DatabaseConfigPresenter;
+import com.helmidev.database.config.DatabaseConfigView;
+import com.main.commons.ModalDialog;
+import com.main.utils.DmsConfig;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.attribute.FileAttribute;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javafx.application.Application;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
@@ -35,20 +48,43 @@ import javafx.stage.Stage;
  */
 public class App extends Application {
 
+    private DatabaseConfigPresenter databaseConfigPresenter;
+
+    public boolean isDatabaseConfigExists() {
+        File dbConfigFile = new File(DmsConfig.DMS_DB_CONFIG_PATH);
+        if (!dbConfigFile.exists()) {
+            return false;
+        }
+        return true;
+    }
+
     @Override
     public void start(Stage stage) throws Exception {
-    
+
         try {
             BorderPane root = new BorderPane(new Label("Loading complete!"));
+
+            /* check DB config. check if file <USER>/DMS/DB/dmsDB.sqlite exists.
+                if not load db config db view to create one 
+             */
             DashboardView mainView = new DashboardView();
-            //DashboardView appView = new DashboardView();
-            
             Scene scene = new Scene(mainView.getView());
             stage.setTitle("DMS APP");
             final String uri = getClass().getResource("/styles/app.css").toExternalForm();
             scene.getStylesheets().add(uri);
             stage.setScene(scene);
+            stage.setOnShown((event) -> {
+                if (!isDatabaseConfigExists()) {
+                    // no db config , ... create one and start the stage
+                    DatabaseConfigView configView = new DatabaseConfigView();
+                    databaseConfigPresenter = (DatabaseConfigPresenter) configView.getPresenter();
+                    ModalDialog modalDialog = new ModalDialog();
+                    Stage configStage = modalDialog.createModal(configView.getView(), ((Stage)event.getSource()).getScene().getRoot());
+                    configStage.showAndWait();
+                }
+            });
             stage.show();
+
         } catch (Exception e) {
             throw e;
         }

@@ -6,11 +6,13 @@
 package com.helmidev.management.category.overview;
 
 import com.helmidev.entities.Category;
+import com.helmidev.management.category.add.AddCategoryView;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -36,19 +38,19 @@ public class CategoryPresenter implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         editCategory.setOnAction((ActionEvent event)  -> {
-            onEditClick();
+            onEditClick(event);
         });
         deleteCategory.setOnAction ((ActionEvent event)-> {
-            onDeleteClick(); 
-        });
+            onDeleteClick(event); 
+        });        
     }
     
     
-    private void onEditClick() {
+    private void onEditClick(ActionEvent event) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    private void onDeleteClick() {
+    private void onDeleteClick(ActionEvent event) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
