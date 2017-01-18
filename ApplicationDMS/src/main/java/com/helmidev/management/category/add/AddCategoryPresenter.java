@@ -13,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 
 /**
  *
@@ -32,17 +33,29 @@ public class AddCategoryPresenter implements Initializable {
         saveButton.setOnAction((ActionEvent event) -> {
             onSaveClick(event);
         });
+        
         cancelButton.setOnAction((ActionEvent event) -> {
             onCancelClick(event);
         });
+        
     }
-
+   
     private void onSaveClick(ActionEvent event) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.SAVE"); //To change body of generated methods, choose Tools | Templates.
     }
 
     private void onCancelClick(ActionEvent event) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.CANCEL"); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    // Only For Embedded View Use
+     public void doNotDisplayCancelButton(){
+        cancelButton.setText("Speichern");
+        cancelButton.setOnAction((ActionEvent event)->{
+            onSaveClick(event);
+    });
+        saveButton.setManaged(false);
+    }
+    
     
 }

@@ -19,7 +19,7 @@
          <children>
             <SplitPane dividerPositions="0.4020100502512563, 0.5" orientation="VERTICAL" VBox.vgrow="ALWAYS">
               <items>
-                <AnchorPane maxHeight="220.0" minHeight="220.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
+                <AnchorPane fx:id="addcategoryPane" maxHeight="220.0" minHeight="220.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="966.0">
                      <children>
                         <StackPane prefHeight="196.0" prefWidth="598.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -28,7 +28,7 @@
                                 <columns>
                                   <TableColumn fx:id="idcolumn" prefWidth="178.0" text="ID" />
                                   <TableColumn fx:id="namecolumn" prefWidth="465.0" text="%lbl_categoryName" />
-                                    <TableColumn fx:id="descriptioncolumn" prefWidth="346.0" text="%lbl_categoryDecription" />
+                                    <TableColumn fx:id="descriptioncolumn" prefWidth="346.0" text="%lbl_categoryDescription" />
                                 </columns>
                                  <columnResizePolicy>
                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

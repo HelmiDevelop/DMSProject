@@ -57,10 +57,13 @@
                                                           <children>
                                                               <Button id="btnNewBilling" fx:id="btnAddNewBilling" mnemonicParsing="false" prefHeight="31.0" prefWidth="260.0" style="-fx-border-radius: 0;" stylesheets="@dashboard.css" text="%lbl_add_new_billing" VBox.vgrow="ALWAYS">
                                                                   <VBox.margin>
-                                                                      <Insets bottom="3.0" />
+                                                                      <Insets bottom="5.0" />
                                                                   </VBox.margin>
                                                               </Button>
-                                                              <Button id="btnViewAllBillings" fx:id="btnViewAllBillings" mnemonicParsing="false" prefHeight="31.0" prefWidth="257.0" text="%lbl_show_all_billings" />
+                                                              <Button id="btnViewAllBillings" fx:id="btnViewAllBillings" mnemonicParsing="false" prefHeight="31.0" prefWidth="260.0" text="%lbl_show_all_billings">
+                                                   <VBox.margin>
+                                                      <Insets bottom="5.0" />
+                                                   </VBox.margin></Button>
                                                           </children>
                                                       </VBox>
                                                   </children>
@@ -76,24 +79,14 @@
                                                   <children>
                                                       <VBox prefHeight="426.0" prefWidth="270.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                           <children>
-                                                              <Button id="btnNewProduct" fx:id="btnAddNewProduct" mnemonicParsing="false" prefHeight="31.0" prefWidth="253.0" text="%lbl_add_new_product">
+                                                              <Button id="btnViewAllProduct" fx:id="btnViewAllProducts" mnemonicParsing="false" prefHeight="31.0" prefWidth="260.0" text="%lbl_productOverview">
                                                                   <VBox.margin>
-                                                                      <Insets bottom="3.0" />
+                                                                      <Insets bottom="5.0" />
                                                                   </VBox.margin>
                                                               </Button>
-                                                              <Button id="btnViewAllProduct" fx:id="btnViewAllProducts" mnemonicParsing="false" prefHeight="31.0" prefWidth="281.0" text="%lbl_show_all_product">
+                                                              <Button fx:id="btnCategoryOverview" mnemonicParsing="false" prefHeight="31.0" prefWidth="260.0" text="%lbl_categoryOverview">
                                                                   <VBox.margin>
-                                                                      <Insets bottom="3.0" />
-                                                                  </VBox.margin>
-                                                              </Button>
-                                                              <Button fx:id="btnAddNewPackaging" mnemonicParsing="false" prefHeight="31.0" prefWidth="262.0" text="%lbl_add_new_packaging">
-                                                                  <VBox.margin>
-                                                                      <Insets bottom="3.0" top="10.0" />
-                                                                  </VBox.margin>
-                                                              </Button>
-                                                              <Button fx:id="btnViewAllPackagings" mnemonicParsing="false" prefHeight="31.0" prefWidth="248.0" text="%lbl_view_All_packagings">
-                                                                  <VBox.margin>
-                                                                      <Insets bottom="3.0" />
+                                                                      <Insets bottom="5.0" />
                                                                   </VBox.margin>
                                                               </Button>
                                                           </children>
@@ -101,6 +94,9 @@
                                                   </children>
                                               </AnchorPane>
                                           </content>
+                                 <padding>
+                                    <Insets bottom="5.0" />
+                                 </padding>
                                       </TitledPane>
                                       <TitledPane animated="true" text="%lbl_menu_customerManagement">
                                           <content>
@@ -110,7 +106,7 @@
                                                           <children>
                                                               <Button id="btnViewAllCustomers" fx:id="btnViewAllCustomers" mnemonicParsing="false" prefHeight="31.0" prefWidth="265.0" text="%lbl_view_all_customers">
                                                                   <VBox.margin>
-                                                                      <Insets bottom="3.0" />
+                                                                      <Insets bottom="5.0" />
                                                                   </VBox.margin>
                                                               </Button>
                                                           </children>
@@ -118,11 +114,17 @@
                                                   </children>
                                               </AnchorPane>
                                           </content>
+                                 <padding>
+                                    <Insets bottom="5.0" />
+                                 </padding>
                                       </TitledPane>
                                   </panes>
                            <HBox.margin>
                               <Insets bottom="6.0" top="6.0" />
                            </HBox.margin>
+                           <padding>
+                              <Insets left="5.0" />
+                           </padding>
                               </Accordion>
                               <AnchorPane id="mainpanel" HBox.hgrow="ALWAYS">
                            <children>
