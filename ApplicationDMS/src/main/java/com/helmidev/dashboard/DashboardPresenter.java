@@ -13,6 +13,7 @@ import com.helmidev.management.product.ProductView;
 import com.helmidev.welcomeboard.WelcomePresenter;
 import com.helmidev.welcomeboard.WelcomeView;
 import com.main.utils.GuiUtils;
+import com.main.utils.ImageNames;
 
 
 
@@ -27,6 +28,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ToolBar;
 import javafx.scene.image.Image;
@@ -56,6 +58,7 @@ public class DashboardPresenter implements Initializable{
     @FXML private ToolBar topToolbar;
     @FXML private MenuBar menuBar;
     @FXML private Menu menuFile;
+    @FXML private Menu menuEdit;
     @FXML private Menu menuHelp;
     @FXML private ProgressBar loadingController;
 
@@ -72,6 +75,7 @@ public class DashboardPresenter implements Initializable{
     public void initialize(URL location, ResourceBundle resources) { 
         bundle = resources;
         imageResourceUrl = getClass().getResource("/images").toExternalForm();
+        handleEditMenuItem();
         handleMainToolbar();
         loadWelcomeView();       
         // set programmatically
@@ -100,6 +104,15 @@ public class DashboardPresenter implements Initializable{
             onCategoryOverview(event);
         });
         
+    }
+    private void handleEditMenuItem(){
+        MenuItem editdb = new MenuItem(bundle.getString("lbl_menuItem_edit_editDb"));
+        Image editdbConfig = new Image(ImageNames.EDIT_PEN.Name());
+        editdb.setGraphic(new ImageView(editdbConfig));
+        editdb.setOnAction((event) -> {
+            onEditDbConfig(event);
+        });
+        this.menuEdit.getItems().add(editdb);
     }
     
     private void handleMainToolbar(){
@@ -172,6 +185,10 @@ public class DashboardPresenter implements Initializable{
         this.mainPanelAnchorPane.getChildren().add(view);
         GuiUtils.handleLoading(loadingController, false);
         System.out.println(event.getSource().toString());
+    }
+
+    private void onEditDbConfig(ActionEvent event) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
