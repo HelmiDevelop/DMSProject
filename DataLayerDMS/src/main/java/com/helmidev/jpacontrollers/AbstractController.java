@@ -5,10 +5,12 @@
  */
 package com.helmidev.jpacontrollers;
 
+import com.helmidev.utils.PersistenceMap;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceUnit;
 
 /**
  *
@@ -17,10 +19,12 @@ import javax.persistence.Persistence;
  */
 public abstract class AbstractController<T> {
 
+    @PersistenceUnit(name = "DMSPU")
     protected EntityManagerFactory emf;
 
     public AbstractController() {
-        emf = Persistence.createEntityManagerFactory("DMSPU");
+        String persistenceProvider = Persistence.PERSISTENCE_PROVIDER;        
+        emf = Persistence.createEntityManagerFactory("DMSPU", PersistenceMap.PersistenceProperties);
     }
 
     protected EntityManager getEntityManager() {

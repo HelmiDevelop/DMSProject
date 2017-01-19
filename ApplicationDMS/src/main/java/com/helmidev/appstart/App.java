@@ -22,12 +22,23 @@ package com.helmidev.appstart;
 //import com.airhacks.followme.dashboard.DashboardView;
 import com.airhacks.afterburner.injection.Injector;
 import com.helmidev.dashboard.DashboardView;
-
+import com.helmidev.database.config.DatabaseConfigPresenter;
+import com.helmidev.database.config.DatabaseConfigView;
+import com.helmidev.database.config.PersitenceUnit;
+import com.main.commons.ModalDialog;
+import com.main.utils.DmsConfig;
+import com.main.utils.JaxbConverter;
+import com.helmidev.utils.PersistenceMap;
+import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javax.xml.bind.JAXBException;
 
 /**
  *
@@ -35,20 +46,56 @@ import javafx.stage.Stage;
  */
 public class App extends Application {
 
+    private DatabaseConfigPresenter databaseConfigPresenter;
+
+    public boolean isDatabaseConfigExists() {
+        File dbConfigFile = new File(DmsConfig.DMS_DB_CONFIG_PATH);
+        if (!dbConfigFile.exists()) {
+            return false;
+        }
+        return true;
+    }
+
     @Override
     public void start(Stage stage) throws Exception {
-    
+
         try {
-            BorderPane root = new BorderPane(new Label("Loading complete!"));
+            /* check DB config. check if file <USER>/DMS/DB/dmsDB.sqlite exists.
+                if not load db config db view to create one 
+             */
             DashboardView mainView = new DashboardView();
-            //DashboardView appView = new DashboardView();
-            
             Scene scene = new Scene(mainView.getView());
             stage.setTitle("DMS APP");
+            stage.setIconified(true);
+            stage.getIcons().add(new Image(getClass().getResource("/images/ic_launch_3x.png").toExternalForm()));
             final String uri = getClass().getResource("/styles/app.css").toExternalForm();
             scene.getStylesheets().add(uri);
             stage.setScene(scene);
+            stage.setOnShown((event) -> {
+                if (!isDatabaseConfigExists()) {
+                    // no db config , ... create one and start the stage
+                    DatabaseConfigView configView = new DatabaseConfigView();
+                    databaseConfigPresenter = (DatabaseConfigPresenter) configView.getPresenter();
+                    ModalDialog modalDialog = new ModalDialog();
+                    Stage configStage = modalDialog.createModal(configView.getView(), ((Stage)event.getSource()).getScene().getRoot());
+                    configStage.showAndWait();
+                }else{
+                    JaxbConverter<PersitenceUnit> jaxbConverter = new JaxbConverter<>();
+                    try {
+                        PersitenceUnit persitenceUnit = jaxbConverter.readXML(PersitenceUnit.class, DmsConfig.DMS_DB_CONFIG_PATH);
+                        PersistenceMap.CreatePersistencePropertyMap(
+                                persitenceUnit.getURL(), 
+                                persitenceUnit.getDBNAME(), 
+                                persitenceUnit.getUSERNANE(), 
+                                persitenceUnit.getPASSWORD(), 
+                                persitenceUnit.getJDBCDRIVER());
+                    } catch (JAXBException ex) {
+                        Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            });
             stage.show();
+
         } catch (Exception e) {
             throw e;
         }
