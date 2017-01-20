@@ -55,6 +55,14 @@ public class App extends Application {
         }
         return true;
     }
+    public boolean DatabaseExists(String path){
+        boolean exist = false;
+        File dataBase = new File(path);
+        if(dataBase.exists()){
+            exist = true;
+        }
+        return exist;
+    }
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -81,12 +89,21 @@ public class App extends Application {
                     JaxbConverter<PersitenceUnit> jaxbConverter = new JaxbConverter<>();
                     try {
                         PersitenceUnit persitenceUnit = jaxbConverter.readXML(PersitenceUnit.class, DmsConfig.DMS_DB_CONFIG_PATH);
-                        PersistenceMap.CreatePersistencePropertyMap(
+                        if (DatabaseExists(persitenceUnit.getURL()+File.separator + persitenceUnit.getDBNAME())){
+                            PersistenceMap.CreatePersistencePropertyMap(
                                 persitenceUnit.getURL(), 
                                 persitenceUnit.getDBNAME(), 
                                 persitenceUnit.getUSERNANE(), 
                                 persitenceUnit.getPASSWORD(), 
                                 persitenceUnit.getJDBCDRIVER());
+                        }else{
+                            PersistenceMap.CreatePersistencePropertyMap(persitenceUnit.getURL(), 
+                                persitenceUnit.getDBNAME()+";create = true", 
+                                persitenceUnit.getUSERNANE(), 
+                                persitenceUnit.getPASSWORD(), 
+                                persitenceUnit.getJDBCDRIVER());
+                        }
+                        
                     } catch (JAXBException ex) {
                         Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
                     }

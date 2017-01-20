@@ -9,6 +9,8 @@
     <class>com.helmidev.entities.Packaging</class>
     <class>com.helmidev.entities.Product</class>
     <class>com.helmidev.entities.Supplier</class>
+    <class>com.helmidev.entities.Shopping</class>
+    <class>com.helmidev.entities.Shoppingdetail</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:sqlite:C:\Users\mayel-1\Documents\NetBeansProjects\javaFx\DMSProject\Database\dmsDB.splite"/>
       <property name="javax.persistence.jdbc.user" value=""/>

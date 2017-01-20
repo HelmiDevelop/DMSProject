@@ -23,6 +23,7 @@ public class PersistenceMap {
     
     static final String JDBC_DRIVER_MYSQL = "com.mysql.jdbc.Driver";
     static final String JDBC_DRIVER_SQLITE = "org.sqlite.JDBC";
+    static final String JDBC_DRIVER_DERBY = "org.apache.derby.jdbc.EmbeddedDriver";
     
     public static Map<String, String> PersistenceProperties;
     
@@ -42,6 +43,8 @@ public class PersistenceMap {
                 return "jdbc:sqlite:";                
             case JDBC_DRIVER_MYSQL:
                 return "jdbc:mysql:";
+            case JDBC_DRIVER_DERBY:
+                return "jdbc:derby:";
             default:
                 return "UNKNOWN:DRIVER:";
         }
