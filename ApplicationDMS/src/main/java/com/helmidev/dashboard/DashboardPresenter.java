@@ -5,6 +5,8 @@
  */
 package com.helmidev.dashboard;
 
+import com.helmidev.database.config.DatabaseConfigPresenter;
+import com.helmidev.database.config.DatabaseConfigView;
 import com.helmidev.management.category.overview.CategoryView;
 import com.helmidev.management.customer.overview.CustomerPresenter;
 import com.helmidev.management.customer.overview.CustomerView;
@@ -65,6 +67,7 @@ public class DashboardPresenter implements Initializable{
     CustomerPresenter customerPresenter;
     ProductPresenter productPresenter;
     WelcomePresenter welcomePresenter;
+    DatabaseConfigPresenter databaseConfigPresenter;
 
     private Consumer<CustomerPresenter> customerconsumer;
 
@@ -117,7 +120,7 @@ public class DashboardPresenter implements Initializable{
     
     private void handleMainToolbar(){
         Button addBillingBtn = new Button();
-        Image billingImage = new Image(imageResourceUrl+"/ic_content_paste_black_24dp.png");
+        Image billingImage = new Image(ImageNames.CONTENT.Name());
         addBillingBtn.setGraphic(new ImageView(billingImage));
         topToolbar.getItems().add(addBillingBtn);
     }    
@@ -188,7 +191,12 @@ public class DashboardPresenter implements Initializable{
     }
 
     private void onEditDbConfig(ActionEvent event) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        DatabaseConfigView databaseConfigView = new DatabaseConfigView();
+        databaseConfigPresenter = (DatabaseConfigPresenter)databaseConfigView.getPresenter();
+        databaseConfigPresenter.fillToEdit();
+        this.mainPanelAnchorPane.getChildren().clear();
+        this.mainPanelAnchorPane.getChildren().add(databaseConfigView.getView());
     }
 
 }

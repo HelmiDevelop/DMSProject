@@ -44,6 +44,18 @@ public enum ImageNames {
     SETTING_2X("ic_settings_2X.png"),
     SETTING_3X("ic_settings_3x.png"),
     
+    LAUNCH("ic_launch.png"),
+    LAUNCH_2X("ic_launch_2X.png"),
+    LAUNCH_3X("ic_launch_3x.png"),
+    
+    CHEVRONLEFT("ic_chevron_left.png"),
+    CHEVRONLEFT_2X("ic_chevron_left_2X.png"),
+    CHEVRONLEFT_3X("ic_chevron_left_3x.png"),
+    
+    CHEVRONRIGHT("ic_chevron_right.png"),
+    CHEVRONRIGHT_2X("ic_chevron_right_2X.png"),
+    CHEVRONRIGHT_3X("ic_chevron_right_3x.png"),
+    
     CONTENT("ic_content_paste.png"),
     CONTENT_2X("ic_content_paste_2X.png"),
     CONTENT_3X("ic_content_paste_3x.png");

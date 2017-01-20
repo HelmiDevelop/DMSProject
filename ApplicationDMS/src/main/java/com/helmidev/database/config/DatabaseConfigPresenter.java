@@ -53,15 +53,19 @@ public class DatabaseConfigPresenter implements Initializable {
     private ImageView checkImage;
 
     ObservableList<String> drivers = FXCollections.observableArrayList();
+    private boolean dbInitialized;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        initView();        
+    }
+    
+    private void initView(){
         drivers.add("SQLITE");
         drivers.add("MYSQL");
         Platform.runLater(() -> {
             this.driver.setItems(drivers);
             this.driver.getSelectionModel().select(0);
-
         });
         save.setOnAction((event) -> {
             onSaveClick(event);
@@ -69,6 +73,25 @@ public class DatabaseConfigPresenter implements Initializable {
         check.setOnAction((event) -> {
             onCheckClick(event);
         });
+    }
+    
+    public void fillToEdit(){
+        JaxbConverter<PersitenceUnit> jaxbConverter = new JaxbConverter<>();
+        PersitenceUnit pu = null;
+        try {
+            pu = jaxbConverter.readXML(PersitenceUnit.class, DmsConfig.DMS_DB_CONFIG_PATH);
+        } catch (JAXBException ex) {
+            Logger.getLogger(DatabaseConfigPresenter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if(pu != null){
+            url.setText(pu.url);
+            dbName.setText(pu.getDBNAME());
+            if(pu.getJDBCDRIVER().equals(DmsConfig.JDBC_DRIVER_SQLITE))
+                driver.getSelectionModel().select("SQLITE");
+            else if (pu.getJDBCDRIVER().equals(DmsConfig.JDBC_DRIVER_MYSQL))
+                driver.getSelectionModel().select("MYSQL");
+        }
+        this.isNewDb.setDisable(true);
     }
 
     private void onSaveClick(ActionEvent event) {
@@ -88,6 +111,7 @@ public class DatabaseConfigPresenter implements Initializable {
 
         try {
             jaxbConverter.writeToFile(persitenceUnit, DmsConfig.DMS_DB_CONFIG_PATH);
+            dbInitialized  = true;
         } catch (JAXBException | IOException ex) {
             Logger.getLogger(DatabaseConfigPresenter.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -95,6 +119,10 @@ public class DatabaseConfigPresenter implements Initializable {
 
     private void onCheckClick(ActionEvent event) {
 
+    }
+
+    public boolean isDbInitialized() {
+        return dbInitialized;
     }
 
 }

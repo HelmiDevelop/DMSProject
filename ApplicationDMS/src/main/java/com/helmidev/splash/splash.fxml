@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="AnchorPane" maxHeight="324.0" maxWidth="510.0" minHeight="324.0" minWidth="510.0" prefHeight="324.0" prefWidth="510.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.helmidev.splash.SplashPresenter">
+   <children>
+      <Pane layoutX="36.0" layoutY="42.0" prefHeight="324.0" prefWidth="510.0" styleClass="splashPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ProgressBar layoutX="51.0" layoutY="73.0" prefHeight="23.0" prefWidth="409.0" />
+            <Label fx:id="informationLabel" alignment="TOP_LEFT" layoutX="51.0" layoutY="110.0" prefHeight="23.0" prefWidth="409.0" text="Label" textFill="#fffdfd" />
+            <VBox fx:id="messagesVbox" layoutX="51.0" layoutY="139.0" prefHeight="179.0" prefWidth="409.0" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

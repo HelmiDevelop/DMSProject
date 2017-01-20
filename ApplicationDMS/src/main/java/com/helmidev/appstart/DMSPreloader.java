@@ -5,45 +5,80 @@
  */
 package com.helmidev.appstart;
 
-import javafx.application.Preloader;
+import com.helmidev.splash.SplashPresenter;
+import com.helmidev.splash.SplashView;
+import com.main.utils.DMSConfigType;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.BiConsumer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javafx.stage.WindowEvent;
 
 /**
  *
  * @author mayel-1
  */
-public class DMSPreloader extends Preloader{
-    private Stage preloaderStage;
+public class DMSPreloader extends Application {
+
+    Stage stage;
+    SplashPresenter splashPresenter;
+    public static Map<DMSConfigType, Boolean> configs;
+
+    private Scene createPreloaderScene() {
+        SplashView splashView = new SplashView();
+        splashPresenter = (SplashPresenter) splashView.getPresenter();
+        return new Scene(splashView.getView());
+    }
+
     @Override
-    public void start(Stage primaryStage) throws Exception {
-       this.preloaderStage = primaryStage;
- 
-       VBox loading = new VBox(20);
-       loading.setMaxWidth(Region.USE_PREF_SIZE);
-       loading.setMaxHeight(Region.USE_PREF_SIZE);
-       loading.getChildren().add(new ProgressBar());
-       loading.getChildren().add(new Label("Please wait..."));
- 
-       BorderPane root = new BorderPane(loading);
-       Scene scene = new Scene(root);
- 
-       primaryStage.setWidth(800);
-       primaryStage.setHeight(600);
-       primaryStage.setScene(scene);
-       primaryStage.show();
-   }
- 
-   @Override
-   public void handleStateChangeNotification(StateChangeNotification stateChangeNotification) {
-      if (stateChangeNotification.getType() == StateChangeNotification.Type.BEFORE_START) {
-         preloaderStage.hide();
-      }
-   }
-    
+    public void start(Stage stage) throws Exception {
+        stage.setScene(createPreloaderScene());
+
+    }
+
+    @Override
+    public void stop() throws Exception {
+        this.stage.close();
+    }
+
+    public static void main(String[] args) {
+        configs = new HashMap();
+        configs.put(DMSConfigType.DATABASE, Boolean.FALSE);
+        configs.put(DMSConfigType.UNPMAPPED, Boolean.FALSE);
+        DMSPreloader.launch(App.class, args);
+        //launch(args);
+    }
+
+    public void startSplash(BiConsumer<WindowEvent, SplashPresenter> consumer) {
+        try {
+            this.stage = new Stage(StageStyle.UNDECORATED);
+            this.start(stage);
+            this.stage.addEventHandler(WindowEvent.WINDOW_SHOWN, (WindowEvent event) -> {
+                for (Map.Entry type : configs.entrySet()) {
+                    Platform.runLater(() -> { 
+                        splashPresenter.setConfigType((DMSConfigType)type.getKey());
+                        consumer.accept(event, splashPresenter);
+                    });
+                }                
+
+            });
+            Platform.runLater(() -> {
+                stage.show();
+            });
+
+        } catch (Exception ex) {
+            Logger.getLogger(DMSPreloader.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public Stage getSplashStage() {
+        return this.stage;
+    }
+
 }
