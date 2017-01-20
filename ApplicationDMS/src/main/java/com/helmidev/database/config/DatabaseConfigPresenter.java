@@ -5,9 +5,13 @@
  */
 package com.helmidev.database.config;
 
+import com.helmidev.appstart.App;
 import com.main.utils.DmsConfig;
 import com.main.utils.JaxbConverter;
+import static com.sun.tools.javac.tree.TreeInfo.args;
+import java.io.File;
 import java.io.IOException;
+import java.lang.management.ManagementFactory;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -25,6 +29,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.stage.Window;
 import javax.xml.bind.JAXBException;
 
 /**
@@ -58,6 +63,7 @@ public class DatabaseConfigPresenter implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         drivers.add("SQLITE");
         drivers.add("MYSQL");
+        drivers.add("DERBY");
         Platform.runLater(() -> {
             this.driver.setItems(drivers);
             this.driver.getSelectionModel().select(0);
@@ -79,18 +85,22 @@ public class DatabaseConfigPresenter implements Initializable {
         persitenceUnit.setUSERNANE(username.getText());
         persitenceUnit.setPASSWORD(password.getText());
         // org.sqlite.JDBC
-        if(((String) driver.getSelectionModel().getSelectedItem()).equals("SQLITE"))
+        if (((String) driver.getSelectionModel().getSelectedItem()).equals("SQLITE")) {
             persitenceUnit.setJDBCDRIVER("org.sqlite.JDBC"); // sqlite driver name
-        else
-            persitenceUnit.setJDBCDRIVER("com.mysql.jdbc.Driver"); // mysql driver  name
-
+        } else if (((String) driver.getSelectionModel().getSelectedItem()).equals("MYSQL")) {
+            persitenceUnit.setJDBCDRIVER("com.mysql.jdbc.Driver");
+        } else {
+            persitenceUnit.setJDBCDRIVER("org.apache.derby.jdbc.EmbeddedDriver");// mysql driver  name
+        }
         JaxbConverter<PersitenceUnit> jaxbConverter = new JaxbConverter<>();
 
         try {
             jaxbConverter.writeToFile(persitenceUnit, DmsConfig.DMS_DB_CONFIG_PATH);
+            
         } catch (JAXBException | IOException ex) {
             Logger.getLogger(DatabaseConfigPresenter.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
 
     private void onCheckClick(ActionEvent event) {

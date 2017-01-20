@@ -27,20 +27,15 @@
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
             <artifactId>eclipselink</artifactId>
-            <version>2.6.4</version>
+            <version>2.5.2</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc -->
-        <!--dependency>
+        <dependency>
             <groupId>org.xerial</groupId>
             <artifactId>sqlite-jdbc</artifactId>
-<<<<<<< HEAD
-            <version>3.15.1</version>
-        </dependency-->
-        
-=======
             <version>3.7.2</version>
-        </dependency>          
->>>>>>> 7192c70712e0c968ced2afe4d18c4dd5222e1839
+        </dependency>
+       
         <dependency>
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>

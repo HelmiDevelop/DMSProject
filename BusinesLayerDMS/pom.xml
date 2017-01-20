@@ -30,14 +30,11 @@
         <dependency>
             <groupId>javax.el</groupId>
             <artifactId>javax.el-api</artifactId>
-<<<<<<< HEAD
             <version>3.0.0</version>
         </dependency>
  
-=======
-            <version>2.2.4</version>
-        </dependency> 
->>>>>>> 7192c70712e0c968ced2afe4d18c4dd5222e1839
+          
+
         <dependency>
             <groupId>org.glassfish.web</groupId>
             <artifactId>javax.el</artifactId>
