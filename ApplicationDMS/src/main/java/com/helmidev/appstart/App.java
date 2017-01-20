@@ -156,12 +156,7 @@ public class App extends Application {
 
     boolean initTest(SplashPresenter presenter) throws InterruptedException {
 
-        SplashService splashService = new SplashService();
-        splashService.setMessageValue("Init Test");
-        splashService.setOnSucceeded((event) -> {
-            presenter.updateMessage((String) event.getSource().getValue());
-        });
-        splashService.start();
+        presenter.updateMessage("Hallo Conifg ");
         
         return true;
     }

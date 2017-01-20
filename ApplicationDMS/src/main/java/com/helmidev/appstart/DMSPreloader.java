@@ -38,6 +38,9 @@ public class DMSPreloader extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        configs = new HashMap();
+        configs.put(DMSConfigType.DATABASE, Boolean.FALSE);
+        configs.put(DMSConfigType.UNPMAPPED, Boolean.FALSE);
         stage.setScene(createPreloaderScene());
 
     }
@@ -48,9 +51,7 @@ public class DMSPreloader extends Application {
     }
 
     public static void main(String[] args) {
-        configs = new HashMap();
-        configs.put(DMSConfigType.DATABASE, Boolean.FALSE);
-        configs.put(DMSConfigType.UNPMAPPED, Boolean.FALSE);
+        
         DMSPreloader.launch(App.class, args);
         //launch(args);
     }
@@ -64,6 +65,11 @@ public class DMSPreloader extends Application {
                     Platform.runLater(() -> { 
                         splashPresenter.setConfigType((DMSConfigType)type.getKey());
                         consumer.accept(event, splashPresenter);
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(DMSPreloader.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     });
                 }                
 

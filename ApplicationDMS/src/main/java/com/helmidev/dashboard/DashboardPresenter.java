@@ -10,8 +10,8 @@ import com.helmidev.database.config.DatabaseConfigView;
 import com.helmidev.management.category.overview.CategoryView;
 import com.helmidev.management.customer.overview.CustomerPresenter;
 import com.helmidev.management.customer.overview.CustomerView;
-import com.helmidev.management.product.ProductPresenter;
-import com.helmidev.management.product.ProductView;
+import com.helmidev.management.product.overview.ProductPresenter;
+import com.helmidev.management.product.overview.ProductView;
 import com.helmidev.welcomeboard.WelcomePresenter;
 import com.helmidev.welcomeboard.WelcomeView;
 import com.main.utils.GuiUtils;
@@ -174,7 +174,6 @@ public class DashboardPresenter implements Initializable{
             this.customerPresenter = (CustomerPresenter) presenter;
             customerPresenter.initializeCustomerTableView();
         }
-
     }
 
     
