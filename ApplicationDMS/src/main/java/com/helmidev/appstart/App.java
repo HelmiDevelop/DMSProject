@@ -55,10 +55,11 @@ public class App extends Application {
         }
         return true;
     }
-    public boolean DatabaseExists(String path){
+
+    public boolean DatabaseExists(String path) {
         boolean exist = false;
         File dataBase = new File(path);
-        if(dataBase.exists()){
+        if (dataBase.exists()) {
             exist = true;
         }
         return exist;
@@ -71,43 +72,6 @@ public class App extends Application {
             /* check DB config. check if file <USER>/DMS/DB/dmsDB.sqlite exists.
                 if not load db config db view to create one 
              */
-            if (!isDatabaseConfigExists()) {
-                    // no db config , ... create one and start the stage
-                    DatabaseConfigView configView = new DatabaseConfigView();
-                    databaseConfigPresenter = (DatabaseConfigPresenter) configView.getPresenter();
-                    ModalDialog modalDialog = new ModalDialog();
-                    Stage configStage = modalDialog.createModal(configView.getView(), ((Stage)event.getSource()).getScene().getRoot());
-                    configStage.showAndWait();
-                    configStage.setOnHidden((hiddenevent) -> {
-                       stage.hide();
-                       //
-                       //restart the app
-                       //
-                       stage.show();
-                    });
-                }else{
-                    JaxbConverter<PersitenceUnit> jaxbConverter = new JaxbConverter<>();
-                    try {
-                        PersitenceUnit persitenceUnit = jaxbConverter.readXML(PersitenceUnit.class, DmsConfig.DMS_DB_CONFIG_PATH);
-                        if (DatabaseExists(persitenceUnit.getURL()+File.separator + persitenceUnit.getDBNAME())){
-                            PersistenceMap.CreatePersistencePropertyMap(
-                                persitenceUnit.getURL(), 
-                                persitenceUnit.getDBNAME(), 
-                                persitenceUnit.getUSERNANE(), 
-                                persitenceUnit.getPASSWORD(), 
-                                persitenceUnit.getJDBCDRIVER());
-                        }else{
-                            PersistenceMap.CreatePersistencePropertyMap(persitenceUnit.getURL(), 
-                                persitenceUnit.getDBNAME()+";create = true", 
-                                persitenceUnit.getUSERNANE(), 
-                                persitenceUnit.getPASSWORD(), 
-                                persitenceUnit.getJDBCDRIVER());
-                        }
-                        
-                    } catch (JAXBException ex) {
-                        Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
             DashboardView mainView = new DashboardView();
             Scene scene = new Scene(mainView.getView());
             stage.setTitle("DMS APP");
@@ -116,7 +80,38 @@ public class App extends Application {
             final String uri = getClass().getResource("/styles/app.css").toExternalForm();
             scene.getStylesheets().add(uri);
             stage.setScene(scene);
-            
+            stage.setOnShown((event) -> {
+                if (!isDatabaseConfigExists()) {
+                    // no db config , ... create one and start the stage
+                    DatabaseConfigView configView = new DatabaseConfigView();
+                    databaseConfigPresenter = (DatabaseConfigPresenter) configView.getPresenter();
+                    ModalDialog modalDialog = new ModalDialog();
+                    Stage configStage = modalDialog.createModal(configView.getView(), ((Stage) event.getSource()).getScene().getRoot());
+                    configStage.showAndWait();
+                } else {
+                    JaxbConverter<PersitenceUnit> jaxbConverter = new JaxbConverter<>();
+                    try {
+                        PersitenceUnit persitenceUnit = jaxbConverter.readXML(PersitenceUnit.class, DmsConfig.DMS_DB_CONFIG_PATH);
+                        if (DatabaseExists(persitenceUnit.getURL() + File.separator + persitenceUnit.getDBNAME())) {
+                            PersistenceMap.CreatePersistencePropertyMap(
+                                    persitenceUnit.getURL(),
+                                    persitenceUnit.getDBNAME(),
+                                    persitenceUnit.getUSERNANE(),
+                                    persitenceUnit.getPASSWORD(),
+                                    persitenceUnit.getJDBCDRIVER());
+                        } else {
+                            PersistenceMap.CreatePersistencePropertyMap(persitenceUnit.getURL(),
+                                    persitenceUnit.getDBNAME() + ";create = true",
+                                    persitenceUnit.getUSERNANE(),
+                                    persitenceUnit.getPASSWORD(),
+                                    persitenceUnit.getJDBCDRIVER());
+                        }
+
+                    } catch (JAXBException ex) {
+                        Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            });
             stage.show();
 
         } catch (Exception e) {

@@ -8,8 +8,8 @@ package com.helmidev.dashboard;
 import com.helmidev.management.category.overview.CategoryView;
 import com.helmidev.management.customer.overview.CustomerPresenter;
 import com.helmidev.management.customer.overview.CustomerView;
-import com.helmidev.management.product.ProductPresenter;
-import com.helmidev.management.product.ProductView;
+import com.helmidev.management.product.overview.ProductPresenter;
+import com.helmidev.management.product.overview.ProductView;
 import com.helmidev.welcomeboard.WelcomePresenter;
 import com.helmidev.welcomeboard.WelcomeView;
 import com.main.utils.GuiUtils;
@@ -41,18 +41,6 @@ import javafx.scene.layout.StackPane;
  */
 public class DashboardPresenter implements Initializable{
 
-    @FXML private Button btn_toolbar_createNewCustomer;
-    @FXML private Button btnAddNewBilling;
-    @FXML private Button btnViewAllBillings;
-
-    
-    @FXML private Button btnViewAllProducts;
-
-    @FXML private Button btnCategoryOverview;
-    
-
-    @FXML private Button btnAddNewCustomer;
-    @FXML private Button btnViewAllCustomers;
     @FXML private StackPane mainPanelAnchorPane;
     @FXML private ToolBar bottomToolbar;
     @FXML private ToolBar topToolbar;
@@ -61,15 +49,41 @@ public class DashboardPresenter implements Initializable{
     @FXML private Menu menuEdit;
     @FXML private Menu menuHelp;
     @FXML private ProgressBar loadingController;
-
-    CustomerPresenter customerPresenter;
-    ProductPresenter productPresenter;
     WelcomePresenter welcomePresenter;
-
-    private Consumer<CustomerPresenter> customerconsumer;
-
     private ResourceBundle bundle;
     private String imageResourceUrl;
+    
+    
+    
+                            /***
+                            * ###########################  
+                            * ### Customer Management ###
+                            * ###########################
+                            */   
+                @FXML private Button btnAddNewCustomer;
+                @FXML private Button btnViewAllCustomers;
+                CustomerPresenter customerPresenter;
+                private Consumer<CustomerPresenter> customerconsumer;
+                @FXML private Button btn_toolbar_createNewCustomer;
+                            /***
+                            * ############################  
+                            * #### Billing Management ####
+                            * ############################
+                            */
+                @FXML private Button btnAddNewBilling;
+                @FXML private Button btnViewAllBillings;
+                
+                            /***
+                            * ############################ 
+                            * #### Product Management ####
+                            * ############################
+                            */
+                @FXML private Button btnViewAllProducts;
+                @FXML private Button btnCategoryOverview;
+                ProductPresenter productPresenter;
+                
+                
+                
     
     @Override
     public void initialize(URL location, ResourceBundle resources) { 
@@ -90,13 +104,12 @@ public class DashboardPresenter implements Initializable{
         btnViewAllBillings.setOnAction((ActionEvent actionEvent) -> {
             onViewAllBillings(actionEvent);
         });
-        
         btnViewAllProducts.setOnAction((ActionEvent event) -> {
             onViewAllProducts(event);
         });
-        /*btnAddNewCustomer.setOnAction((ActionEvent actionEvent)->{
+        btnAddNewCustomer.setOnAction((ActionEvent actionEvent)->{
             onAddNewCustomer(actionEvent);
-        });*/
+        });
         btnViewAllCustomers.setOnAction((ActionEvent event) -> {
             onViewAllCustomers(event);
         });
@@ -114,7 +127,9 @@ public class DashboardPresenter implements Initializable{
         });
         this.menuEdit.getItems().add(editdb);
     }
-    
+    private void onEditDbConfig(ActionEvent event) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     private void handleMainToolbar(){
         Button addBillingBtn = new Button();
         Image billingImage = new Image(imageResourceUrl+"/ic_content_paste_black_24dp.png");
@@ -128,7 +143,15 @@ public class DashboardPresenter implements Initializable{
         this.mainPanelAnchorPane.getChildren().clear();
         this.mainPanelAnchorPane.getChildren().add(view);
     }
-
+    
+    
+    
+    
+                            /***
+                            * ############################  
+                            * #### Billing Management ####
+                            * ############################
+                            */
     private void onAddNewBilling(ActionEvent event) {
         //TODO load add new billing view
         System.out.println(event.getSource().toString());
@@ -138,9 +161,15 @@ public class DashboardPresenter implements Initializable{
         //TODO load Billings table View
         System.out.println(event.getSource().toString());
     }
-
     
-
+    
+    
+    
+                            /***
+                            * ############################ 
+                            * #### Product Management ####
+                            * ############################
+                            */
     private void onViewAllProducts(ActionEvent event) {
         //TOD load product table.
         GuiUtils.handleLoading(loadingController, true);
@@ -151,8 +180,27 @@ public class DashboardPresenter implements Initializable{
         this.mainPanelAnchorPane.getChildren().clear();
         this.mainPanelAnchorPane.getChildren().add(view);
         GuiUtils.handleLoading(loadingController, false);
+        System.out.println(event.getSource().toString());  
+    }
+    private void onCategoryOverview(ActionEvent event) {
+        GuiUtils.handleLoading(loadingController, true);
+        CategoryView categoryView = new CategoryView();
+        categoryView.getPresenter();
+        Parent view = categoryView.getView();
+        this.mainPanelAnchorPane.getChildren().clear();
+        this.mainPanelAnchorPane.getChildren().add(view);
+        GuiUtils.handleLoading(loadingController, false);
         System.out.println(event.getSource().toString());
     }
+    
+    
+    
+    
+                            /***
+                            * ###########################  
+                            * ### Customer Management ###
+                            * ###########################
+                            */
 
     private void onViewAllCustomers(ActionEvent event) {      
         GuiUtils.handleLoading(loadingController, true);
@@ -165,6 +213,9 @@ public class DashboardPresenter implements Initializable{
         GuiUtils.handleLoading(loadingController, false);
         System.out.println(event.getSource().toString());
     }
+    private void onAddNewCustomer(ActionEvent actionEvent) {
+        
+    }
 
     private void consume(Object presenter) {
         if (presenter instanceof CustomerPresenter) {
@@ -176,19 +227,10 @@ public class DashboardPresenter implements Initializable{
 
     
 
-    private void onCategoryOverview(ActionEvent event) {
-        GuiUtils.handleLoading(loadingController, true);
-        CategoryView categoryView = new CategoryView();
-        categoryView.getPresenter();
-        Parent view = categoryView.getView();
-        this.mainPanelAnchorPane.getChildren().clear();
-        this.mainPanelAnchorPane.getChildren().add(view);
-        GuiUtils.handleLoading(loadingController, false);
-        System.out.println(event.getSource().toString());
-    }
+    
 
-    private void onEditDbConfig(ActionEvent event) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
+
+    
 
 }

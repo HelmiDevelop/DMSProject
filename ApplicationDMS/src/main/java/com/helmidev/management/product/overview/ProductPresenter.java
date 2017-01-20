@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.helmidev.management.product;
+package com.helmidev.management.product.overview;
 
 import com.helmidev.management.category.add.AddCategoryView;
 import com.main.commons.ModalDialog;
