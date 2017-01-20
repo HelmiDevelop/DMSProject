@@ -5,6 +5,7 @@
  */
 package com.helmidev.database.config;
 
+import com.main.commons.ModalDialog;
 import com.main.utils.DmsConfig;
 import com.main.utils.JaxbConverter;
 import java.io.IOException;
@@ -19,6 +20,7 @@ import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
@@ -65,6 +67,7 @@ public class DatabaseConfigPresenter implements Initializable {
         });
         save.setOnAction((event) -> {
             onSaveClick(event);
+            
         });
         check.setOnAction((event) -> {
             onCheckClick(event);
@@ -88,6 +91,7 @@ public class DatabaseConfigPresenter implements Initializable {
 
         try {
             jaxbConverter.writeToFile(persitenceUnit, DmsConfig.DMS_DB_CONFIG_PATH);
+            
         } catch (JAXBException | IOException ex) {
             Logger.getLogger(DatabaseConfigPresenter.class.getName()).log(Level.SEVERE, null, ex);
         }

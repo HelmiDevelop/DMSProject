@@ -63,22 +63,20 @@ public class App extends Application {
             /* check DB config. check if file <USER>/DMS/DB/dmsDB.sqlite exists.
                 if not load db config db view to create one 
              */
-            DashboardView mainView = new DashboardView();
-            Scene scene = new Scene(mainView.getView());
-            stage.setTitle("DMS APP");
-            stage.setIconified(true);
-            stage.getIcons().add(new Image(getClass().getResource("/images/ic_launch_3x.png").toExternalForm()));
-            final String uri = getClass().getResource("/styles/app.css").toExternalForm();
-            scene.getStylesheets().add(uri);
-            stage.setScene(scene);
-            stage.setOnShown((event) -> {
-                if (!isDatabaseConfigExists()) {
+            if (!isDatabaseConfigExists()) {
                     // no db config , ... create one and start the stage
                     DatabaseConfigView configView = new DatabaseConfigView();
                     databaseConfigPresenter = (DatabaseConfigPresenter) configView.getPresenter();
                     ModalDialog modalDialog = new ModalDialog();
                     Stage configStage = modalDialog.createModal(configView.getView(), ((Stage)event.getSource()).getScene().getRoot());
                     configStage.showAndWait();
+                    configStage.setOnHidden((hiddenevent) -> {
+                       stage.hide();
+                       //
+                       //restart the app
+                       //
+                       stage.show();
+                    });
                 }else{
                     JaxbConverter<PersitenceUnit> jaxbConverter = new JaxbConverter<>();
                     try {
@@ -93,7 +91,15 @@ public class App extends Application {
                         Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
-            });
+            DashboardView mainView = new DashboardView();
+            Scene scene = new Scene(mainView.getView());
+            stage.setTitle("DMS APP");
+            stage.setIconified(true);
+            stage.getIcons().add(new Image(getClass().getResource("/images/ic_launch_3x.png").toExternalForm()));
+            final String uri = getClass().getResource("/styles/app.css").toExternalForm();
+            scene.getStylesheets().add(uri);
+            stage.setScene(scene);
+            
             stage.show();
 
         } catch (Exception e) {
@@ -107,7 +113,7 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
-        DMSPreloader.launch(App.class, args);
+        launch(App.class, args);
         //launch(args);
     }
 }

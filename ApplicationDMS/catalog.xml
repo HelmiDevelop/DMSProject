@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="file:/C:/Users/mayel-1/Documents/NetBeansProjects/javaFx/DMS-APP/ApplicationDMS/src/main/resources/schemas/persitenceUnit.xsd" uri="src/main/resources/jaxb/DbConfigModel/persitenceUnit.xsd"/>
+</catalog>
