@@ -174,7 +174,6 @@ public class DashboardPresenter implements Initializable{
             this.customerPresenter = (CustomerPresenter) presenter;
             customerPresenter.initializeCustomerTableView();
         }
-
     }
 
     
