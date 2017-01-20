@@ -8,9 +8,7 @@ package com.main.utils;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
-import javafx.geometry.NodeOrientation;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.control.ToolBar;
 
 /**
  *

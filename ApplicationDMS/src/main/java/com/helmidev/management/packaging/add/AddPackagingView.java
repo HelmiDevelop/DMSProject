@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.helmidev.management.product;
+package com.helmidev.management.packaging.add;
 
 import com.airhacks.afterburner.views.FXMLView;
 
 /**
  *
- * @author mayel-1
+ * @author hoben
  */
-public class ProductView extends FXMLView{
+public class AddPackagingView extends FXMLView{
     
 }

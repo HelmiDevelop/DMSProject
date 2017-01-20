@@ -45,21 +45,18 @@
                           <children>
                               <Accordion prefHeight="100.0" prefWidth="268.0">
                                   <panes>
-                                      <TitledPane animated="true" expanded="true" text="%lbl_menu_billingManagement">
+                                      <TitledPane animated="true" text="%lbl_menu_customerManagement">
                                           <content>
                                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                                   <children>
-                                                      <VBox prefHeight="426.0" prefWidth="270.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                      <VBox layoutX="14.0" prefHeight="426.0" prefWidth="270.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                           <children>
-                                                              <Button id="btnNewBilling" fx:id="btnAddNewBilling" mnemonicParsing="false" prefHeight="31.0" prefWidth="260.0" style="-fx-border-radius: 0;" stylesheets="@dashboard.css" text="%lbl_add_new_billing" VBox.vgrow="ALWAYS">
+                                                              <Button id="btnViewAllCustomers" fx:id="btnViewAllCustomers" mnemonicParsing="false" prefHeight="31.0" prefWidth="265.0" text="%lbl_view_all_customers">
                                                                   <VBox.margin>
                                                                       <Insets bottom="5.0" />
                                                                   </VBox.margin>
                                                               </Button>
-                                                              <Button id="btnViewAllBillings" fx:id="btnViewAllBillings" mnemonicParsing="false" prefHeight="31.0" prefWidth="260.0" text="%lbl_show_all_billings">
-                                                   <VBox.margin>
-                                                      <Insets bottom="5.0" />
-                                                   </VBox.margin></Button>
+                                                <Button id="btnViewAllCustomers" fx:id="btnAddNewCustomer" mnemonicParsing="false" prefHeight="31.0" prefWidth="265.0" text="%lbl_addnew_customer" />
                                                           </children>
                                                       </VBox>
                                                   </children>
@@ -94,17 +91,21 @@
                                     <Insets bottom="5.0" />
                                  </padding>
                                       </TitledPane>
-                                      <TitledPane animated="true" text="%lbl_menu_customerManagement">
+                                      <TitledPane animated="true" expanded="true" text="%lbl_menu_billingManagement">
                                           <content>
                                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                                   <children>
-                                                      <VBox layoutX="14.0" prefHeight="426.0" prefWidth="270.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                      <VBox prefHeight="426.0" prefWidth="270.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                           <children>
-                                                              <Button id="btnViewAllCustomers" fx:id="btnViewAllCustomers" mnemonicParsing="false" prefHeight="31.0" prefWidth="265.0" text="%lbl_view_all_customers">
+                                                              <Button id="btnNewBilling" fx:id="btnAddNewBilling" mnemonicParsing="false" prefHeight="31.0" prefWidth="260.0" style="-fx-border-radius: 0;" stylesheets="@dashboard.css" text="%lbl_add_new_billing" VBox.vgrow="ALWAYS">
                                                                   <VBox.margin>
                                                                       <Insets bottom="5.0" />
                                                                   </VBox.margin>
                                                               </Button>
+                                                              <Button id="btnViewAllBillings" fx:id="btnViewAllBillings" mnemonicParsing="false" prefHeight="31.0" prefWidth="260.0" text="%lbl_show_all_billings">
+                                                   <VBox.margin>
+                                                      <Insets bottom="5.0" />
+                                                   </VBox.margin></Button>
                                                           </children>
                                                       </VBox>
                                                   </children>
@@ -114,6 +115,26 @@
                                     <Insets bottom="5.0" />
                                  </padding>
                                       </TitledPane>
+                              <TitledPane text="%lbl_shopping_management">
+                                <content>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                </content>
+                              </TitledPane>
+                              <TitledPane text="untitled">
+                                <content>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                </content>
+                              </TitledPane>
+                              <TitledPane text="untitled">
+                                <content>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                </content>
+                              </TitledPane>
+                              <TitledPane text="untitled">
+                                <content>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                </content>
+                              </TitledPane>
                                   </panes>
                            <HBox.margin>
                               <Insets bottom="6.0" top="6.0" />

@@ -28,7 +28,7 @@ public class ModalDialog {
         container.getChildren().add(view);
         
         Stage dialog = new Stage();
-        dialog.initModality(Modality.APPLICATION_MODAL);
+        dialog.initModality(Modality.WINDOW_MODAL);
         dialog.initStyle(StageStyle.UTILITY);
         dialog.setMaximized(false);
         dialog.setScene(new Scene(container));        

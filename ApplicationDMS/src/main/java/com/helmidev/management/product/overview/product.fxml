@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="749.0" prefWidth="973.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.helmidev.management.product.ProductPresenter">
+<AnchorPane id="AnchorPane" prefHeight="749.0" prefWidth="973.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.helmidev.management.product.overview.ProductPresenter">
    <children>
       <SplitPane dividerPositions="0.4578313253012048" layoutX="48.0" layoutY="14.0" orientation="VERTICAL" prefHeight="749.0" prefWidth="973.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>

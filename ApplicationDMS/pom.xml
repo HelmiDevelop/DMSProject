@@ -64,6 +64,7 @@
             <version>2.5.2</version>
             <scope>provided</scope>
         </dependency>
+        
     </dependencies>
     <build>
         <defaultGoal>clean package</defaultGoal>
